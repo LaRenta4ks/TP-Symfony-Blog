@@ -1,17 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ article.title }} - Mon Blog{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <article>
         <h1>{{ article.title }}</h1>
-        <p>Par {{ article.author }} le {{ article.createdAt|date('d/m/Y') }}</p>
-        <div>{{ article.content }}</div>
         {% if article.isPremium %}
-            <span class="badge badge-warning">Premium</span>
+            <span class="badge bg-warning">Premium</span>
         {% endif %}
+        <p class="text-muted">Par {{ article.author }} le {{ article.createdAt|date('d/m/Y') }}</p>
         <div class="mt-4">
-            <a href="{{ path('article_index') }}" class="btn btn-secondary">Retour aux articles</a>
+            {{ article.content|raw }}
         </div>
+    </article>
+    
+    <div class="mt-4">
+        <a href="{{ path('app_article_all') }}" class="btn btn-secondary">Retour à la liste</a>
+        <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour à l'accueil</a>
     </div>
 {% endblock %}
