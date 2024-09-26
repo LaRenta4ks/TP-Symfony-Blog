@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles - Mon Blog{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des articles</h1>
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <h2>{{ article.title }}</h2>
+                        <p>{{ article.content[:100] }}...</p>
+                        <a href="{{ path('article_show', { id: article.id }) }}" class="btn btn-primary">Lire la suite</a>
+                        {% if article.isPremium %}
+                            <span class="badge badge-warning">Premium</span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun article trouvé.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
